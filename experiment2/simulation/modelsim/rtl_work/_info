@@ -1,0 +1,54 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/Anthony Huang/Desktop/experiment2/simulation/modelsim
+vexperiment2
+Z1 !s110 1646754081
+!i10b 1
+!s100 >OBeNORWWS`;D=KY9aU2K2
+I=nBIm67z9LoK11B[j9coi0
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1646753743
+8C:/Users/Anthony Huang/Desktop/experiment2/experiment2.v
+FC:/Users/Anthony Huang/Desktop/experiment2/experiment2.v
+L0 1
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z4 !s108 1646754081.000000
+!s107 C:/Users/Anthony Huang/Desktop/experiment2/experiment2.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/Anthony Huang/Desktop/experiment2|C:/Users/Anthony Huang/Desktop/experiment2/experiment2.v|
+!i113 1
+Z5 o-vlog01compat -work work
+!s92 -vlog01compat -work work {+incdir+C:/Users/Anthony Huang/Desktop/experiment2}
+Z6 tCvgOpt 0
+vexperiment2_vlg_tst
+R1
+!i10b 1
+!s100 hcP[``;b2n6YL8@liDk]>2
+Io9@:G>LobEB8YCl[4i0n]1
+R2
+R0
+w1646752670
+8C:/Users/Anthony Huang/Desktop/experiment2/simulation/modelsim/experiment2.vt
+FC:/Users/Anthony Huang/Desktop/experiment2/simulation/modelsim/experiment2.vt
+L0 28
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Anthony Huang/Desktop/experiment2/simulation/modelsim/experiment2.vt|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/Anthony Huang/Desktop/experiment2/simulation/modelsim|C:/Users/Anthony Huang/Desktop/experiment2/simulation/modelsim/experiment2.vt|
+!i113 1
+R5
+!s92 -vlog01compat -work work {+incdir+C:/Users/Anthony Huang/Desktop/experiment2/simulation/modelsim}
+R6
