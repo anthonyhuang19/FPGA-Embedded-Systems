@@ -1,0 +1,144 @@
+// Copyright (C) 2017  Intel Corporation. All rights reserved.
+// Your use of Intel Corporation's design tools, logic functions 
+// and other software and tools, and its AMPP partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Intel Program License 
+// Subscription Agreement, the Intel Quartus Prime License Agreement,
+// the Intel FPGA IP License Agreement, or other applicable license
+// agreement, including, without limitation, that your use is for
+// the sole purpose of programming logic devices manufactured by
+// Intel and sold by Intel or its authorized distributors.  Please
+// refer to the applicable agreement for further details.
+
+// *****************************************************************************
+// This file contains a Verilog test bench template that is freely editable to  
+// suit user's needs .Comments are provided in each section to help the user    
+// fill out necessary details.                                                  
+// *****************************************************************************
+// Generated on "04/25/2022 23:30:33"
+                                                                                
+// Verilog Test Bench template for design : exp7
+// 
+// Simulation tool : ModelSim-Altera (Verilog)
+// 
+
+`timescale 1 ps/ 1 ps
+module ps2_keyboard_model(
+	output reg ps2_clk,
+	output reg ps2_data
+);
+parameter [31:0] kbd_clk_period = 60;
+initial ps2_clk = 1'b1;
+task kbd_sendcode;
+	input [7:0] code; // key to be sent
+	integer i;
+
+	reg[10:0] send_buffer;
+	begin
+		send_buffer[0] = 1'b0; // start bit
+		send_buffer[8:1] = code; // code
+		send_buffer[9] = ~(^code); // odd parity bit
+		send_buffer[10] = 1'b1; // stop bit
+		i = 0;
+		while( i < 11) begin
+			ps2_data = send_buffer[i];
+			#(kbd_clk_period/2) ps2_clk = 1'b0;
+			#(kbd_clk_period/2) ps2_clk = 1'b1;
+			i = i + 1;
+		end
+	end
+endtask
+
+endmodule
+
+
+
+
+
+
+
+
+module exp7_vlg_tst();
+// constants                                           
+// general purpose registers
+//reg eachvec;
+// test vector input registers
+parameter [31:0] clock_period = 10;
+reg CLOCK2_50;
+reg CLOCK3_50;
+reg CLOCK4_50;
+reg CLOCK_50;
+reg [3:0] KEY;
+reg treg_PS2_CLK;
+reg treg_PS2_CLK2;
+reg treg_PS2_DAT;
+reg treg_PS2_DAT2;
+reg [9:0] SW;
+// wires                                               
+wire [6:0]  HEX0;
+wire [6:0]  HEX1;
+wire [6:0]  HEX2;
+wire [6:0]  HEX3;
+wire [6:0]  HEX4;
+wire [6:0]  HEX5;
+wire [9:0]  LEDR;
+wire PS2_CLK;
+wire PS2_CLK2;
+wire PS2_DAT;
+wire PS2_DAT2;
+ps2_keyboard_model model(
+	.ps2_clk(kbd_clk),
+	.ps2_data(kbd_data)
+);
+
+// assign statements (if any)                          
+assign PS2_CLK = treg_PS2_CLK;
+assign PS2_CLK2 = treg_PS2_CLK2;
+assign PS2_DAT = treg_PS2_DAT;
+assign PS2_DAT2 = treg_PS2_DAT2;
+exp7 i1 (
+// port map - connection between master ports and signals/registers   
+	.CLOCK2_50(CLOCK2_50),
+	.CLOCK3_50(CLOCK3_50),
+	.CLOCK4_50(CLOCK4_50),
+	.CLOCK_50(CLOCK_50),
+	.HEX0(HEX0),
+	.HEX1(HEX1),
+	.HEX2(HEX2),
+	.HEX3(HEX3),
+	.HEX4(HEX4),
+	.HEX5(HEX5),
+	.KEY(KEY),
+	.LEDR(LEDR),
+	.PS2_CLK(PS2_CLK),
+	.PS2_CLK2(PS2_CLK2),
+	.PS2_DAT(PS2_DAT),
+	.PS2_DAT2(PS2_DAT2),
+	.SW(SW)
+);
+initial begin /* clock driver */
+	CLOCK2_50 = 0;
+	forever
+		#(clock_period/2) CLOCK2_50 = ~CLOCK2_50;
+end
+
+initial                                                
+begin                                                  
+	SW[0] = 1'b0; #20;
+	SW[0] = 1'b1; #20;
+	model.kbd_sendcode(8'h1C); // press 'A'
+	model.kbd_sendcode(8'hF0); // break code
+	model.kbd_sendcode(8'h1C); // release 'A'
+	model.kbd_sendcode(8'h1B); // press 'S'
+	#20 model.kbd_sendcode(8'h1B); // keep pressing 'S'
+	#20 model.kbd_sendcode(8'h1B); // keep pressing 'S'
+	model.kbd_sendcode(8'hF0); // break code
+	model.kbd_sendcode(8'h1B); // release 'S'
+	#20;
+	$stop;     
+end                                                    
+                                             
+endmodule
+

@@ -1,0 +1,47 @@
+module experiment8_2
+(
+	input clk,
+	input clear,
+	output [7:0] red,
+	output [7:0] green,
+	output [7:0] blue,
+	output head_syn,
+	output dst_syn,
+	output clock,
+	output empty,
+	output sync
+);
+   
+assign sync = 0;
+				
+clkgen #(25000000) vgaclks(clk,clear,1'b1,clock);
+
+wire [3:0] r,g,b;
+wire [9:0] head_address;
+wire [9:0] v_address;
+
+ram ram
+(
+	.addr({h_addr,v_addr[8:0]}),
+	.clk(VGA_CLK),
+	.r(r),
+	.g(g),
+	.b(b)
+);
+	
+	
+vga_ctrl VGA(
+ .pclk(VGA_CLK), 
+ .reset(reset), 
+ .vga_data({r,4'b0000,g,4'b0000,b,4'b0000}), 
+ .h_addr(h_addr), 
+ .v_addr(v_addr),
+ .hsync(VGA_HS),  
+ .vsync(VGA_VS),
+ .valid(VGA_BLANK_N), 
+ .vga_r(VGA_R), 
+ .vga_g(VGA_G),
+ .vga_b(VGA_B)
+ );	
+
+endmodule 
