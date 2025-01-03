@@ -1,4 +1,4 @@
-# Digital Logic & Embedded Systems Design: FPGA-Based Experiment Files
+# FPGA-Embedded Systems: Advanced Digital Logic Experiments
 
 ## Overview
 
